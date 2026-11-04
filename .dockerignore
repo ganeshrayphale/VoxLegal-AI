@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+**/.env
+**/.env.*
+**/node_modules
+**/dist
+**/__pycache__
+**/*.py[cod]
+backend/venv
+backend/uploads
+backend/audio_cache
+backend/models
+research

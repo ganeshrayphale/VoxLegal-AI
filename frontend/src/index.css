@@ -1,0 +1,314 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   VOXLEGAL AI — DESIGN SYSTEM & MASTER STYLESHEET
+   Direction: Forest Green & Warm White Legal-Tech Design System
+   Target: WCAG 2.2 AA Compliance, Clean Typography, Subtle Hairline Borders
+───────────────────────────────────────────────────────────────────────────── */
+
+/* 1. DESIGN TOKENS */
+:root {
+  /* Brand Palette (From Visual Reference & Master Prompt) */
+  --color-forest: #24483F;
+  --color-forest-deep: #19372F;
+  --color-action-green: #145A43;
+  --color-bg-warm: #F7F7F2;
+  --color-white: #FFFFFF;
+  --color-text-primary: #202B28;
+  --color-text-secondary: #65716C;
+  --color-text-muted: #87938E;
+  --color-border: #E2E7E2;
+  --color-border-hover: #CBD5CB;
+  --color-mint-soft: #DDECE3;
+  --color-mint-subtle: #EEF4EF;
+  --color-mint-dark: #1F6B52;
+  --color-highlight-amber: #FFF6D6;
+  --color-highlight-border: #F59E0B;
+
+  /* Semantic Feedback */
+  --color-success: #145A43;
+  --color-success-bg: #EAF6EF;
+  --color-warning: #946200;
+  --color-warning-bg: #FFF5D6;
+  --color-error: #B42318;
+  --color-error-bg: #FEF0EF;
+  --color-info: #1D4ED8;
+  --color-info-bg: #EFF6FF;
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+
+  /* Base Sizing & Multiplier */
+  --font-size-base: 15px;
+  --line-height-base: 1.6;
+
+  /* Radii Scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 9px;
+  --radius-card: 14px;
+  --radius-panel: 18px;
+  --radius-pill: 9999px;
+
+  /* Shadows (Subtle, non-distracting) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+  --shadow-card-hover: 0 6px 12px -2px rgba(25, 55, 47, 0.08);
+  --shadow-dropdown: 0 10px 25px -5px rgba(25, 55, 47, 0.12), 0 8px 10px -6px rgba(25, 55, 47, 0.06);
+
+  /* Layout */
+  --sidebar-width: 250px;
+  --navbar-height: 64px;
+}
+
+/* Text Size Variations */
+html[data-text-size="large"] {
+  --font-size-base: 17.5px;
+  --line-height-base: 1.7;
+}
+
+html[data-text-size="xlarge"] {
+  --font-size-base: 20px;
+  --line-height-base: 1.8;
+}
+
+/* High Contrast Mode */
+html.high-contrast {
+  --color-bg-warm: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-text-primary: #000000;
+  --color-text-secondary: #1F2937;
+  --color-text-muted: #374151;
+  --color-border: #000000;
+  --color-border-hover: #000000;
+  --color-mint-soft: #D1E7DD;
+  --color-mint-subtle: #F0FDF4;
+  --color-forest: #0B3326;
+  --color-forest-deep: #000000;
+  --color-action-green: #064E3B;
+  --color-highlight-amber: #FEF08A;
+  --color-highlight-border: #000000;
+}
+
+html.high-contrast * {
+  outline-color: #000000 !important;
+}
+
+html.high-contrast button:focus-visible,
+html.high-contrast a:focus-visible,
+html.high-contrast input:focus-visible,
+html.high-contrast textarea:focus-visible {
+  outline: 3px solid #000000 !important;
+  outline-offset: 3px !important;
+}
+
+/* Low Vision Mode */
+html.low-vision {
+  --font-size-base: 19px;
+  --line-height-base: 1.8;
+}
+
+html.low-vision button,
+html.low-vision input,
+html.low-vision select {
+  min-height: 48px !important;
+}
+
+html.low-vision .brand-name {
+  font-size: 24px !important;
+}
+
+html.low-vision .chat-bubble {
+  padding: 18px 22px !important;
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* 2. BASE & RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Focus indicator for keyboard navigation */
+:focus-visible {
+  outline: 2.5px solid var(--color-action-green);
+  outline-offset: 2px;
+}
+
+/* Skip link for screen readers & keyboard nav */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  background: var(--color-forest-deep);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  z-index: 9999;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+a {
+  color: var(--color-forest);
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 3. CORE BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-forest);
+  color: #FFFFFF;
+  border: 1px solid var(--color-forest-deep);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-action-green);
+  box-shadow: 0 2px 6px rgba(20, 90, 67, 0.25);
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-mint-subtle);
+  border-color: var(--color-border-hover);
+}
+
+.btn-mint {
+  background-color: var(--color-mint-soft);
+  color: var(--color-forest-deep);
+  border: 1px solid rgba(36, 72, 63, 0.15);
+}
+
+.btn-mint:hover:not(:disabled) {
+  background-color: #CCE3D5;
+}
+
+.btn-danger {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  border: 1px solid #FCA5A5;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 4. UTILITY / BADGES */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.badge-mint {
+  background-color: var(--color-mint-soft);
+  color: var(--color-forest-deep);
+}
+
+.badge-amber {
+  background-color: var(--color-highlight-amber);
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.badge-success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badge-error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* 5. SPINNER */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

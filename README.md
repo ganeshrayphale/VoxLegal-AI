@@ -22,6 +22,10 @@ The included `Dockerfile` builds the React frontend and serves it with the FastA
 
 Cloud Run has a monthly free usage allowance, but requires a billing account and usage beyond the allowance can incur charges. Set a budget alert and review Cloud Run, Cloud Build, and Artifact Registry pricing before deploying.
 
+## Publish and demo the fine-tuned model for free
+
+The local Indian legal model is a LoRA adapter for an 8B Llama base model. The adapter files are not included in GitHub. See [huggingface/README.md](./huggingface/README.md) to upload the adapter to a public Hugging Face model repository and create a separate, quota-limited ZeroGPU demo. This is a standalone model demo, not an integration with the VoxLegal application.
+
 ## Public-demo and document privacy warning
 
 This app is a prototype, not a secure multi-user legal-document service. The API currently keeps the active clause index in shared process memory and writes uploaded files to local storage. Do not upload confidential or personally identifying documents to a public deployment. Add authentication, per-user document isolation, upload limits, and data retention controls before using it with real client documents.
